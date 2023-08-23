@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreEvaluation;
 use App\Http\Resources\EvaluationResource;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
@@ -29,8 +30,10 @@ class EvaluetionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEvaluation $request, $company)
     {
-        //
+        $evaluation = $this->repository->create($request->validated());
+
+        return new EvaluationResource($evaluation);
     }
 }
